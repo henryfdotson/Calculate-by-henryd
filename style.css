@@ -85,7 +85,7 @@ div#calculator {
   grid-row: 4;
 }
 
-.result {
+#result {
   text-align: right;
   background: lightgrey;
   padding: 1rem;
