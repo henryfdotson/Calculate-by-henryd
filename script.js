@@ -4,7 +4,12 @@ var value1;
 var value2;
 var number = 0;
 var firstValueAquired = false;
+var operatorPressed = false;
 var operatorAquired = false;
+var storedNumber = "";
+var storedOperator;
+var secondStoredNumber = "";
+var equalsGet = false;
 
 // Methods
 
@@ -15,31 +20,34 @@ function changeButtonColor(color) {
   }
 }
 
-function getValue(number) {
-
-  // Check to see if first value has been aquired yet
-  if (firstValueAquired == false) {
-    value1 = number;
-    resultDisplay.textContent = value1;
-    firstValueAquired = true;
-    changeButtonColor('lightgray');
+// This function can be called to get a number upon a button click
+function getNumbers(pressedButton) {
+  if (firstValueAquired != true) {
+    do {
+      if((pressedButton != "+") && (pressedButton != "-") && (pressedButton != "x") && (pressedButton != "/") ) {
+        storedNumber = storedNumber +pressedButton;
+        document.getElementById('result').textContent = storedNumber;
+      }
+      else {
+        storedOperator = pressedButton;
+        document.getElementById('result').textContent = storedOperator;
+        operatorAquired = true;
+        firstValueAquired = true;
+      }
+    } while (operatorAquired = false);
   }
-  // Once the first value has been aquired, get the second
   else {
-    value2 = number;
-    changeButtonColor('black');
+    // Need to gray out operators and highlight "=" sign
+    do {
+      if(pressedButton != "=") {
+        secondStoredNumber = secondStoredNumber +pressedButton;
+        document.getElementById('result').textContent = secondStoredNumber;
+      }
+      else {
+        equalsGet = true;
+        theResult = eval(storedNumber+storedOperator+secondStoredNumber);
+        document.getElementById('result').textContent = theResult;
+      }
+    } while (equalsGet = false);
   }
-
-}
-
-function addNumbers(a, b) {
-  first = a;
-  second = b;
-  result = a + b;
-  resultDisplay.textContent = result;
-}
-
-function equals() {
-
-  resultDisplay.textContent = result;
 }
